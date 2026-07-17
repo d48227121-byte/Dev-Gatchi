@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Dev-Gatchi | DeD</title>
+
+</head>
+<body>
+     <header> 
+        <h1>Dev-Gatchi</h1>
+        <P>Tieni in vita il tuo Web Developer!</P>
+     </header>
+
+     <main class="game-box">
+
+        <section class="stats-panel" aria-label="stats-vital">
+            <div class="stats-group">
+                <label for="bar-salute">Salute Mentale</label>
+                <progress id="bar-salute" max="100" value="100"></progress>            
+            </div>
+
+            <div class="stats-group">
+                <label for="bar-caffe">Livello Caffeina</label>
+                <progress id="bar-caffe" max="100" value="100"></progress>            
+            </div>
+
+            <div class="stats-group">
+                <label for="bar-bugs">Bug Code</label>
+                <progress id="bar-bugs" max="100" value="100"></progress>            
+            </div>
+        </section>
+
+        <section class="screen-panel">
+            <div id="avatar">
+                <img id="avatar-img" src="IMG.png" alt="Dev Avatar">
+            </div>
+            <div id="status-text">Il Dev sta programmando....</div>
+        </section>
+
+        <section class="controls-panel" aria-label="AcT">
+             <button id="btn-caffe" type="button"> Offri Caffè</button>
+             <button id="btn-code" type="button"> Scrivi Codice</button>
+             <button id="btn-fix" type="button"> Fixa Bug</button>
+        </section>
+       
+     </main>
+
+     <button id="btn-audio-cerchio">🔊</button>
+
+     <footer>
+        <p>Codice Rilasciato in Produzione: <span id="score">0</span> linee</p>
+     </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
