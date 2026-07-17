@@ -46,26 +46,25 @@ header p {
 }
 
 #btn-audio-cerchio {
-    position: absolute;       /* Lo ancora in un punto preciso */
-    top: 20px;                /* Distanza dal bordo superiore */
-    right: 20px;              /* Distanza dal bordo destro */
-    width: 50px;              /* Larghezza del cerchio */
-    height: 50px;             /* Altezza del cerchio (uguale alla larghezza!) */
-    border-radius: 50%;       /* Taglia gli angoli creando un cerchio perfetto */
-    background-color: #ffffff;/* Sfondo bianco */
-    border: 3px solid #000000;/* Bordo nero netto nello stile del tuo box */
-    font-size: 1.4rem;        /* Dimensione dell'emoji */
+    position: absolute;       
+    right: 20px;             
+    width: 50px;             
+    height: 50px;            
+    border-radius: 50%;       
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    font-size: 1.4rem;      
     cursor: pointer;
     display: flex;
-    justify-content: center;  /* Centra l'emoji in orizzontale */
-    align-items: center;      /* Centra l'emoji in verticale */
-    z-index: 100;             /* Rimane sopra gli altri elementi del gioco */
+    justify-content: center;  
+    align-items: center;      
+    z-index: 100;             
     transition: transform 0.1s;
 }
 
 #btn-audio-cerchio:hover {
-    background-color: #00ff66; /* Diventa verde quando ci passi sopra */
-    transform: scale(1.05);    /* Si ingrandisce leggermente */
+    background-color: #00ff66; 
+    transform: scale(1.05);    
 }
 
 footer {

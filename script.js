@@ -1,6 +1,3 @@
-// ==========================================================================
-// STATO DEL GIOCO (Valori iniziali)
-// ==========================================================================
 const stats = {
     salute: 100,
     caffe: 100,
@@ -8,18 +5,14 @@ const stats = {
     linee: 0
 };
 
-// Selettori elementi HTML
 const barSalute = document.getElementById('bar-salute');
 const barCaffe = document.getElementById('bar-caffe');
 const barBugs = document.getElementById('bar-bugs');
 const scoreSpan = document.getElementById('score');
 const statusText = document.getElementById('status-text'); 
 const avatarImg = document.getElementById('avatar-img');   
-
-// Stato animazione
 let azioneInCorso = false;
 
-// Audio
 const bgMusic = new Audio('check-questo-nasty-ahh-synth.mp3');
 bgMusic.loop = true; 
 bgMusic.volume = 0.5; 
@@ -35,7 +28,6 @@ function playSound(sound) {
     sound.play().catch(e => console.log("Audio in attesa di interazione"));
 }
 
-// GESTIONE DEL CERCHIO AUDIO (SILENZIA)
     const btnAudio = document.getElementById('btn-audio-cerchio');
     let musicaMutata = false;
 
@@ -43,35 +35,30 @@ function playSound(sound) {
         btnAudio.addEventListener('click', () => {
             if (musicaMutata) {
                 bgMusic.play().catch(e => console.log("Errore audio"));
-                btnAudio.innerText = "🔊"; // Rimetti l'altoparlante attivo
+                btnAudio.innerText = "🔊"; 
                 musicaMutata = false;
             } else {
                 bgMusic.pause();
-                btnAudio.innerText = "🔇"; // Cambia in altoparlante sbarrato
+                btnAudio.innerText = "🔇"; 
                 musicaMutata = true;
             }
         });
     }
-    
+
 function mostraImmagineAzione(nomeImmagine, testoAzione) {
     azioneInCorso = true;
     
-    // Cambia subito la grafica e il testo
+   
     if (avatarImg) avatarImg.src = nomeImmagine;
     if (statusText) statusText.innerText = testoAzione;
     
-    // Dopo 1.5 secondi torna allo stato normale
     setTimeout(() => {
         azioneInCorso = false;
         updateUI();
     }, 1500);
 }
 
-// ==========================================================================
-// AGGIORNAMENTO INTERFACCIA
-// ==========================================================================
 function updateUI() {
-    // Se l'easter egg è attivo, blocca l'aggiornamento dell'interfaccia
     if (azioneInCorso && statusText && statusText.innerText.includes("Ehi tu")) {
         return; 
     }
@@ -81,7 +68,6 @@ function updateUI() {
     if (barBugs) barBugs.value = stats.bugs;
     if (scoreSpan) scoreSpan.innerText = stats.linee;
 
-    // Gestione Game Over
     if (stats.salute <= 0) {
         if (statusText) statusText.innerText = "BURNOUT CRITICO! Game Over.";
         if (avatarImg) avatarImg.src = "gameover.png"; 
@@ -92,9 +78,6 @@ function updateUI() {
     }
 }
 
-// ==========================================================================
-// LOOP TEMPORALE (Ogni 2 secondi)
-// ==========================================================================
 const gameInterval = setInterval(() => {
     stats.caffe = Math.max(0, stats.caffe - 4);
     
@@ -113,9 +96,6 @@ const gameInterval = setInterval(() => {
     updateUI();
 }, 2000);
 
-// ==========================================================================
-// LOGICA PULSANTI
-// ==========================================================================
 window.addEventListener('DOMContentLoaded', () => {
 
     const startMusic = () => {
@@ -136,7 +116,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Click Tasto Scrivi Codice
     document.getElementById('btn-code')?.addEventListener('click', () => {
         if (stats.salute > 0) {
             playSound(sfxClick); 
@@ -147,7 +126,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Click Tasto Fix Bug
     document.getElementById('btn-fix')?.addEventListener('click', () => {
         if (stats.salute > 0) {
             playSound(sfxClick); 
@@ -162,15 +140,11 @@ window.addEventListener('DOMContentLoaded', () => {
     updateUI();
 });
 
-// ==========================================================================
-    // EASTER EGG: DIALOGO MULTIPLO + CAMBIO IMMAGINE
-    // ==========================================================================
     const parolaSegreta = "3497018169"; 
     let tastiPremuti = "";
     let easterEggAttivo = false;
     let indiceFrase = 0;
 
-    // Definisci qui tutte le frasi e le immagini che vuoi mostrare in sequenza!
     const dialoghiEasterEgg = [
         { testo: "Ehi tu... sì, dico a te davanti allo schermo!", img: "esteregg.png" },
         { testo: "Perchè mi stai chimando?", img: "esteregg.png" },
@@ -179,27 +153,22 @@ window.addEventListener('DOMContentLoaded', () => {
     ];
 
     window.addEventListener('keydown', (e) => {
-        // Se l'easter egg è attivo e l'utente preme INVIO
+ 
         if (easterEggAttivo && e.key === 'Enter') {
-            indiceFrase++; // Passa alla frase successiva
 
-            // Se ci sono ancora frasi nel dialogo, le mostra
             if (indiceFrase < dialoghiEasterEgg.length) {
                 if (statusText) statusText.innerText = dialoghiEasterEgg[indiceFrase].testo;
                 if (avatarImg) avatarImg.src = dialoghiEasterEgg[indiceFrase].img;
             } else {
-                // Se il dialogo è finito, riavvia il gioco da capo
                 easterEggAttivo = false;
                 azioneInCorso = false;
-                indiceFrase = 0; // Resetta l'indice per la prossima volta
+                indiceFrase = 0;
 
-                // Ripristina le statistiche
                 stats.salute = 100;
                 stats.caffe = 100;
                 stats.bugs = 0;
                 stats.linee = 0;
 
-                // Fai ripartire la musica
                 bgMusic.currentTime = 0;
                 bgMusic.play().catch(err => console.log("Errore audio al riavvio"));
                 
@@ -211,7 +180,6 @@ window.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Tracciamento della parola segreta "heytu"
         tastiPremuti += e.key.toLowerCase();
         if (tastiPremuti.length > parolaSegreta.length) {
             tastiPremuti = tastiPremuti.substring(tastiPremuti.length - parolaSegreta.length);
@@ -219,12 +187,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (tastiPremuti === parolaSegreta && !easterEggAttivo) {
             easterEggAttivo = true;
-            azioneInCorso = true; // Blocca i timer di gioco
-            indiceFrase = 0;     // Parte dalla prima frase
+            azioneInCorso = true; 
+            indiceFrase = 0;     
             
-            bgMusic.pause(); // Ferma la musica
+            bgMusic.pause(); 
             
-            // Mostra la prima scena dell'easter egg
             if (statusText) statusText.innerText = dialoghiEasterEgg[0].testo;
             if (avatarImg) avatarImg.src = dialoghiEasterEgg[0].img;
             
